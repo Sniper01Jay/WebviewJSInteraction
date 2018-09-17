@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js交互测试</title>
+</head>
+<body>
+    <div>
+        <button style="height: 30px; font-size: 14px; margin-top: 20px" onclick="ttf.nslog('JS调用OC方法');">点击我然后查看Xcode</button>
+    </div>
+    <div>
+        <button id="aa" style="height: 30px; font-size: 14px; margin-top: 20px" onclick="ttf.pushToWKWebView('JS与OC交互');">进入下一页</button>
+    </div>
+    <div>
+        <button style="height: 25px; font-size: 14px; margin-top: 20px" onclick="goNext('wkwebview');">js调用oc方法(WKWebView)</button>
+    </div>
+
+<script type="text/javascript">
+    var  btn = document.getElementById('aa');
+    function testI(name) {
+        print ('o,调用我了');
+<!--        btn.innerText = name;-->
+        alert(name + '调用了我');
+    }
+    function goNext(view) {
+        // 要实现js调用OC，我们首先要在html代码中预留调用OC的接口，也就是要在html中，按固定格式声明一个方法，方法的格式：
+        // 来调用发送数据给iOS端
+        // window.webkit.messageHandlers.<name>.postMessage(<messageBody>)
+        window.webkit.messageHandlers.collectsendKey.postMessage(view);
+    }
+</script>
+</body>
+</html>
